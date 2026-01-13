@@ -90,7 +90,7 @@ Then enable GitHub Pages in repository settings.
 ## 📞 Contact Information
 
 - **Phone**: +27 72 460 3624
-- **Email**: offgridsolution@gmail.com
+- **Email**: info@offgridit.co.za
 - **WhatsApp**: [Click to Chat](https://wa.me/27724603624)
 - **Owner**: Mandla Nyoni
 
@@ -100,7 +100,7 @@ Then enable GitHub Pages in repository settings.
 
 Edit `index.html` and search for:
 - Phone numbers: `+27 72 460 3624`
-- Email: `offgridsolution@gmail.com`
+- Email: `info@offgridit.co.za`
 - WhatsApp link: `https://wa.me/27724603624`
 
 ### Change Colors
@@ -219,7 +219,7 @@ Copyright © 2026 OffGrid Solutions - Mandla Nyoni. All rights reserved.
 ## 📧 Support
 
 For questions or issues:
-- Email: offgridsolution@gmail.com
+- Email: info@offgridit.co.za
 - Phone: +27 72 460 3624
 
 ---
