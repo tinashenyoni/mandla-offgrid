@@ -95,6 +95,11 @@ function triggerAnimations() {
 }
 
 // Contact Form Handling
+// To set up EmailJS:
+// 1. Go to https://www.emailjs.com/ and create an account
+// 2. Create a new email service (Gmail, Outlook, etc.)
+// 3. Create an email template with variables: to_email, from_name, from_email, phone, organization, service, message, subject
+// 4. Replace YOUR_PUBLIC_KEY, YOUR_SERVICE_ID, YOUR_TEMPLATE_ID with actual values
 function handleContactForm(event) {
     event.preventDefault();
 
@@ -108,22 +113,102 @@ function handleContactForm(event) {
         message: document.getElementById('message').value
     };
 
-    // Log form data (in production, this would send to a server)
-    console.log('Form submitted:', formData);
+    // Disable submit button
+    const submitButton = document.querySelector('.btn-submit');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
 
-    // Show success message
-    const form = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
-    
-    form.style.display = 'none';
-    successMessage.style.display = 'flex';
+    // Initialize EmailJS (replace with your public key)
+    emailjs.init('YOUR_PUBLIC_KEY');
 
-    // Reset form and hide success message after 3 seconds
-    setTimeout(() => {
-        form.reset();
-        form.style.display = 'flex';
-        successMessage.style.display = 'none';
-    }, 3000);
+    // Map service type to display name
+    const serviceOptions = {
+        'power': 'Power-Independent IT Services',
+        'internet': 'Off-Grid Internet & Connectivity',
+        'security': 'Security & Surveillance',
+        'it-support': 'IT Support',
+        'smart-solutions': 'Smart Off-Grid Solutions',
+        'training': 'Training & Capacity Building',
+        'maintenance': 'Maintenance Contracts',
+        'hardware': 'Hardware Sales & Rentals',
+        'other': 'Other / Multiple Services'
+    };
+    const serviceDisplay = serviceOptions[formData.serviceType] || formData.serviceType;
+
+    // Prepare email parameters
+    const emailParams = {
+        to_email: 'info@offgridit.co.za',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        organization: formData.organization,
+        service: serviceDisplay,
+        message: formData.message,
+        subject: 'New Site Assessment Request – OffGrid Solutions'
+    };
+
+    // Send email
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailParams)
+        .then(function(response) {
+            console.log('Email sent successfully:', response);
+            
+            // Show success message
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            form.style.display = 'none';
+            successMessage.style.display = 'flex';
+
+            // Reset form and hide success message after 5 seconds
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'block';
+                successMessage.style.display = 'none';
+                submitButton.disabled = false;
+                submitButton.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    Submit Request
+                `;
+            }, 5000);
+        }, function(error) {
+            console.error('Email send failed:', error);
+            
+            // Show error message
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.innerHTML = `
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+                <h3 class="heading-3">Error</h3>
+                <p class="body-medium">
+                    There was an error sending your request. Please try again or contact us directly.
+                </p>
+            `;
+            
+            const form = document.getElementById('contactForm');
+            form.parentNode.insertBefore(errorMessage, form);
+            
+            // Remove error message after 5 seconds
+            setTimeout(() => {
+                if (errorMessage.parentNode) {
+                    errorMessage.parentNode.removeChild(errorMessage);
+                }
+                submitButton.disabled = false;
+                submitButton.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    Submit Request
+                `;
+            }, 5000);
+        });
 }
 
 // Header Scroll Effect
