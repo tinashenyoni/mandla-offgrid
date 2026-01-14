@@ -41,7 +41,7 @@ static-website/
 - Company name: OffGrid Solutions
 - Owner: Mandla Nyoni
 - Phone: +27 72 460 3624
-- Email: offgridsolution@gmail.com
+- Email: info@offgridit.co.za
 - All service descriptions
 - All sections and text
 
@@ -202,7 +202,7 @@ After deploying to GitHub Pages:
 ### Change Company Info
 Search and replace in `index.html`:
 - Phone: `+27 72 460 3624`
-- Email: `offgridsolution@gmail.com`
+- Email: `info@offgridit.co.za`
 - WhatsApp: `https://wa.me/27724603624`
 - Owner: `Mandla Nyoni`
 
@@ -261,7 +261,7 @@ Edit `style.css` root variables:
 ## 📞 Support
 
 Need help?
-- Email: offgridsolution@gmail.com
+- Email: info@offgridit.co.za
 - Phone: +27 72 460 3624
 
 ## 🎉 You're Done!
