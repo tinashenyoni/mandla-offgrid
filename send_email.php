@@ -77,5 +77,4 @@ if (mail($to, $subject, $emailBody, $headers)) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Failed to send email']);
 }
-?></content>
-<parameter name="filePath">/workspaces/mandla-offgrid/send_email.php
+?>
